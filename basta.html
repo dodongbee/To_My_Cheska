@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For My Cheska 💌</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root{ --bg1:#fff5fb; --bg2:#eaf7ff; --ink:#1f1f1f; --accent:#ff7aa2; --accent2:#6aa8ff; --env:#ff9ec2; --flap:#ff76ab; --paper:#fffaf6; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;
+      background:
+        radial-gradient(1200px 1200px at -10% -20%, var(--bg2), transparent 60%),
+        radial-gradient(1200px 1200px at 110% -10%, var(--bg1), transparent 60%),
+        linear-gradient(180deg,#fff,#fff 30%, var(--bg1));
+      overflow-x:hidden;
+    }
+    .container{min-height:100%; display:flex; align-items:center; justify-content:center; padding:20px; position:relative; z-index:1}
+
+    /* Hearts background */
+    .bg-hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0}
+    .heart{position:absolute; width:20px; height:18px; opacity:.9; pointer-events:none; z-index:0}
+    .heart svg{display:block; width:100%; height:100%}
+
+    /* Envelope */
+    .envelope{position:relative; width:min(420px,92vw); height:260px; perspective:1000px; filter:drop-shadow(0 12px 24px rgba(0,0,0,.12)); cursor:pointer}
+    .env-body{position:absolute; inset:0; background:var(--env); border-radius:12px}
+    .env-flap{position:absolute; left:0; right:0; top:0; height:56%; background:linear-gradient(180deg,var(--flap),#ff8fb7); clip-path:polygon(0 0,100% 0,50% 100%); transform-origin:top center; transition: transform 900ms cubic-bezier(.2,.7,.15,1); border-top-left-radius:12px; border-top-right-radius:12px; z-index:3}
+
+    /* Letter overlay */
+    .letter-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.35); display:none; justify-content:center; align-items:center; z-index:1500; pointer-events:none }
+    .letter-overlay.show{ display:flex; pointer-events:auto }
+    .letter-box{ width:92%; height:92%; background:var(--paper); border-radius:16px; padding:36px 28px 120px; overflow-y:auto; transform:translateY(40px); opacity:0; transition:transform 350ms ease, opacity 300ms ease; box-shadow:0 16px 40px rgba(0,0,0,.30) }
+    .letter-overlay.show .letter-box{ transform:translateY(0); opacity:1 }
+
+    /* Letter content */
+    .env-paper h1{margin:0 0 18px; font-family:"Playfair Display", serif; font-size:clamp(28px,6vw,40px); color:#1a1a1a}
+    .env-paper p{line-height:1.8; margin:16px 0; font-size:17px}
+    .sig{text-align:right; margin-top:20px; font-weight:600; font-size:16px}
+    .photo{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; box-shadow:0 6px 16px rgba(0,0,0,.12); margin:14px 0 }
+
+    .cta{ margin-top:14px; display:inline-block; padding:12px 18px; border:0; border-radius:999px; background:linear-gradient(90deg, var(--accent), var(--accent2)); color:#fff; font-weight:700; letter-spacing:.3px; box-shadow:0 10px 22px rgba(106,168,255,.3); cursor:pointer }
+
+    /* Surprise section */
+    .section{max-width:900px; margin:48px auto 80px; padding:0 16px; display:none}
+    .section.show{display:block}
+    .card{background:#fff; border-radius:16px; padding:18px; box-shadow:0 10px 26px rgba(0,0,0,.12)}
+    .card h2{margin:0 0 8px}
+    .art{width:100%; max-height:70vh; object-fit:contain; border-radius:12px; background:#fff}
+
+    /* Glitter */
+    .glitter {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.9;
+      z-index: 2200;
+    }
+
+    /* Music player */
+    .player{position:fixed; right:12px; bottom:12px; background:#ffffffcc; backdrop-filter:blur(12px); border:1px solid #ffffffaa; border-radius:12px; padding:10px 12px; display:flex; gap:8px; align-items:center; box-shadow:0 10px 24px rgba(0,0,0,.12); z-index:2000}
+    .player button{border:0; background:var(--accent2); color:#fff; font-weight:700; padding:8px 12px; border-radius:999px; cursor:pointer}
+    .player input[type=range]{width:120px}
+
+    footer{margin:40px 0 80px; text-align:center; font-size:12px; color:#777}
+  </style>
+</head>
+<body>
+  <div class="bg-hearts" id="bg"></div>
+
+  <div class="container">
+    <div class="envelope" id="env" aria-label="Open Envelope">
+      <div class="env-body"></div>
+      <div class="env-flap"></div>
+    </div>
+  </div>
+
+  <!-- Letter overlay -->
+  <div class="letter-overlay" id="letterOverlay">
+    <div class="letter-box env-paper">
+      <h1>Happy First Monthsary, My Cheska</h1>
+      <img class="photo" src="" alt="" onerror="this.remove()" />
+      <p>Dear Cheska,</p>
+      <p>Even though we aren’t together on this special day, I want you to feel every bit of my love reaching you, no matter the distance. Happy first monthsary, baby. Time has never felt so beautiful—it moves differently when every second is spent loving you. You will always be my dream girl, no matter what you think or believe. Out of everyone in this world, it’s you I’m grateful for, and I thank you endlessly for choosing me.</p>
+      <p>Thank you, baby, for making me feel emotions I never thought I’d experience, and for showing me that I deserve happiness I once doubted I was worthy of. Thank you for your patience when I’m at my lowest, and for celebrating with me in my happiest highs. I cherish every part of you, every bit of your love, and everything you bring into my life.</p>
+      <p>I’m sorry too, baby—for the misunderstandings, for my shortcomings, and for the times I’ve struggled to communicate properly. I know I’ve sometimes made you the outlet of emotions you never deserved to carry, and I regret every moment that hurt you. I’m sorry if I’ve seemed different from the person you first knew. But please trust me when I say I will do everything to become better—for you, for us. I may not be perfect, and I may stumble, but my heart will always be set on keeping you.</p>
+      <p>This is only the first month of our forever, and already I can’t wait for all the months and years to come. I look forward to the memories we’ll make, the dreams we’ll build, and the love we’ll continue to grow every single day. I promise to keep finding ways to show you how much I love you—not just now, but for as long as I breathe.</p>
+      <p>Through distance, through misunderstandings, through fear and doubt—I’ll still be here. Because I believe in us, and I know we can conquer anything together.</p>
+      <p>Cheska, I love you today, tomorrow, and every day that follows—until my very last breath.</p>
+      <p class="sig">—Forever Yours, Maki</p>
+      <button class="cta" id="goFurther">❤️</button>
+    </div>
+  </div>
+
+  <section class="section" id="surprise">
+    <div class="card">
+      <h2>Maligayang Unang Buwan ng Pagmamahal, Cheska</h2>
+      <p>Tunay na gumaganda ang paligid tuwing nasisilayan ko ang iyong ngiti. Kaya naman pangarap at layunin kong magtayo ng tahanan para sa ating dalawa—isang puno ng saya, ligaya, at ngiti mo lang ang lagi kong makikita. Mahal na mahal kita, Cheska, higit pa sa kaya kong ipahayag sa mga salita.</p>
+      <img class="art" id="art" src="my-drawing.jpg" alt="This is what I was talking about when I told you I drew you from memory." />
+    </div>
+  </section>
+
+  <footer>I love you so much, Cheska.</footer>
+
+  <audio id="bgm" preload="auto" loop autoplay playsinline>
+    <source src="pag-ibig.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="player" aria-label="music controls">
+    <button id="pp">Play</button>
+    <input id="vol" type="range" min="0" max="1" step="0.01" value="0.7" />
+  </div>
+
+  <script>
+    // Hearts
+    const bg = document.getElementById('bg');
+    const palette = ['#ff6b9a','#ff3f80','#ff99c2','#ffa6c9','#6aa8ff'];
+    function makeHeartEl(color){
+      const wrap = document.createElement('div');
+      wrap.className = 'heart';
+      wrap.style.color = color;
+      wrap.innerHTML = `<svg viewBox="0 0 32 29"><path fill="currentColor" d="M23.6,0c-2.6,0-5,1.2-6.6,3.2C15.4,1.2,13,0,10.4,0C4.7,0,0,4.7,0,10.4c0,10.1,13.7,17.2,16.5,18.5 C19.3,27.6,32,20.5,32,10.4C32,4.7,27.3,0,21.6,0H23.6z"/></svg>`;
+      return wrap;
+    }
+    function spawnHeart(){
+      const h = makeHeartEl(palette[(Math.random()*palette.length)|0]);
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.bottom = '-24px';
+      const scale = 0.7 + Math.random()*1.3;
+      h.style.transform = 'scale('+scale+')';
+      const dur = 10 + Math.random()*12;
+      bg.appendChild(h);
+      h.animate([
+        { transform:'translateY(40px) scale('+scale+')', opacity: 0 },
+        { transform:'translateY(-110vh) scale('+scale+')', opacity: 1, offset:.15 },
+        { transform:'translateY(-120vh) scale('+scale+')', opacity: 0 }
+      ], { duration: dur*1000, easing:'linear', fill:'forwards' });
+      setTimeout(()=>h.remove(), dur*1000+500);
+    }
+    for(let i=0;i<12;i++) setTimeout(spawnHeart, i*300);
+    setInterval(spawnHeart, 900);
+
+    function burstHearts(n=18, x=null, y=null){
+      const rect = env.getBoundingClientRect();
+      const cx = x ?? (rect.left + rect.width/2);
+      const cy = y ?? (rect.top + rect.height/2);
+      for(let i=0;i<n;i++){
+        const h = makeHeartEl(palette[(Math.random()*palette.length)|0]);
+        h.style.left = cx + 'px';
+        h.style.top  = cy + 'px';
+        h.style.position = 'fixed';
+        h.style.zIndex = 1200;
+        h.style.pointerEvents = 'none';
+        document.body.appendChild(h);
+        const dx = (Math.random()*2-1) * 160;
+        const dy = - (60 + Math.random()*180);
+        const dur = 800 + Math.random()*700;
+        h.animate([
+          { transform:'translate(0,0) scale(1)', opacity:1 },
+          { transform:'translate('+dx+'px,'+dy+'px) scale(.85)', opacity:0 }
+        ], { duration:dur, easing:'cubic-bezier(.22,.61,.36,1)', fill:'forwards' });
+        setTimeout(()=>h.remove(), dur+100);
+      }
+    }
+
+    // Glitter burst
+    function burstGlitter(n = 40, x = window.innerWidth/2, y = window.innerHeight/2) {
+      const colors = ["#ff6b9a", "#ffd700", "#6aa8ff", "#b47aff", "#ffffff"];
+      for (let i = 0; i < n; i++) {
+        const g = document.createElement("div");
+        g.className = "glitter";
+        g.style.background = colors[Math.floor(Math.random() * colors.length)];
+        g.style.left = x + "px";
+        g.style.top = y + "px";
+        document.body.appendChild(g);
+
+        const dx = (Math.random() * 2 - 1) * 220;
+        const dy = (Math.random() * -1) * 280;
+        const dur = 1000 + Math.random() * 900;
+
+        g.animate(
+          [
+            { transform: "translate(0,0) scale(1)", opacity: 1 },
+            { transform: `translate(${dx}px, ${dy}px) scale(0.3)`, opacity: 0 }
+          ],
+          { duration: dur, easing: "ease-out", fill: "forwards" }
+        );
+
+        setTimeout(() => g.remove(), dur + 100);
+      }
+    }
+
+    // Envelope + Letter
+    const env = document.getElementById('env');
+    const overlay = document.getElementById('letterOverlay');
+    const goFurther = document.getElementById('goFurther');
+    const surprise = document.getElementById('surprise');
+
+    function openLetter(e){ overlay.classList.add('show'); burstHearts(22, e?.clientX || window.innerWidth/2, e?.clientY || window.innerHeight/2); }
+    function closeLetter(){ overlay.classList.remove('show'); }
+
+    env.addEventListener('click', openLetter);
+
+    overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeLetter(); });
+
+    goFurther.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      closeLetter();
+      setTimeout(()=>{
+        surprise.classList.add('show');
+        surprise.scrollIntoView({behavior:'smooth'});
+        burstHearts(16, e.clientX || window.innerWidth/2, e.clientY || window.innerHeight/2);
+        burstGlitter();
+      }, 50);
+    });
+
+    // Music
+    const bgm = document.getElementById('bgm');
+    const pp = document.getElementById('pp');
+    const vol = document.getElementById('vol');
+    function updatePP(){ if(pp) pp.textContent = bgm.paused ? 'Play' : 'Pause'; }
+    if(pp){
+      pp.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if(bgm.paused){ bgm.play().then(updatePP).catch(()=>{}); }
+        else{ bgm.pause(); updatePP(); }
+      });
+    }
+    if(vol){ vol.addEventListener('input', (e)=>{ bgm.volume = +e.target.value; }); bgm.volume = +vol.value; }
+    window.addEventListener('load', ()=>{ bgm.play().then(updatePP).catch(()=>{}); });
+    document.addEventListener('click', ()=>{ if(bgm.paused){ bgm.play().then(updatePP).catch(()=>{}); } }, { once:true });
+
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeLetter(); });
+  </script>
+</body>
+</html>
